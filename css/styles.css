@@ -1,0 +1,244 @@
+/* --- Import Google Fonts --- */
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@700&family=Nunito+Sans:wght@400;700&display=swap');
+
+/* --- Variables de Color: Tema Cósmico --- */
+:root {
+    --bg-dark: #0d1117;
+    --primary-container: #161b22;
+    --text-primary: #c9d1d9;
+    --text-secondary: #8b949e;
+    --accent-color: #58a6ff;
+    --accent-hover: #79b8ff;
+    --border-color: #30363d;
+}
+
+/* --- Estilos Generales --- */
+body {
+    font-family: 'Nunito Sans', sans-serif;
+    margin: 0;
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    background-image: radial-gradient(circle, #222b38 10%, var(--bg-dark) 70%);
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 700;
+    color: var(--accent-color);
+    text-shadow: 0 0 7px rgba(88, 166, 255, 0.3);
+}
+
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--accent-hover);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* --- Header --- */
+header {
+    background-color: var(--primary-container);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.logo img {
+    max-height: 70px; /* Logo agrandado */
+    filter: drop-shadow(0 0 6px var(--accent-color));
+}
+
+.nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: var(--text-primary);
+}
+
+.nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.nav-list li {
+    margin-left: 25px;
+}
+
+.nav-list a {
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: text-shadow 0.3s;
+}
+
+.nav-list a:hover {
+    text-shadow: 0 0 8px var(--accent-hover);
+}
+
+/* --- Contenido Principal --- */
+main {
+    padding: 2rem;
+    max-width: 960px;
+    margin: 2rem auto;
+    min-height: 70vh;
+    /* Se eliminó el estilo de contenedor */
+}
+
+/* --- Footer --- */
+footer {
+    text-align: center;
+    padding: 1.5rem;
+    background-color: var(--primary-container);
+    color: var(--text-secondary);
+    border-top: 1px solid var(--border-color);
+    margin-top: 2rem;
+}
+
+/* --- Estilos del Acordeón (Página de Sagas) --- */
+.saga-accordion {
+    margin-bottom: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    overflow: hidden;
+    background-color: var(--primary-container);
+}
+.saga-accordion-header {
+    background-color: #1f2833;
+    cursor: pointer;
+    padding: 1rem;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-family: 'Exo 2', sans-serif;
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    transition: background-color 0.3s ease;
+}
+
+.saga-accordion-header:hover, .saga-accordion-header.active {
+    background-color: #2c3a4a;
+}
+
+.saga-accordion-header::after {
+    content: '+';
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: bold;
+    color: var(--accent-color);
+    float: right;
+    transition: transform 0.3s ease;
+}
+
+.saga-accordion-header.active::after {
+    content: '−';
+    transform: rotate(180deg);
+}
+
+.saga-accordion-panel {
+    padding: 0 1.5rem;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out;
+}
+
+/* --- Estilos de Galería y Lightbox --- */
+.gallery-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.gallery-item img {
+    border: 2px solid var(--border-color);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-item img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px var(--accent-color);
+}
+
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    animation: fadeIn 0.4s;
+}
+
+.lightbox-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 90%;
+    max-height: 80%;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.lightbox-close:hover {
+    color: var(--accent-color);
+}
+
+#lightbox-caption {
+    text-align: center;
+    color: var(--text-primary);
+    padding: 20px;
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Exo 2', sans-serif;
+    font-size: 1.2rem;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+/* --- Media Queries --- */
+@media (max-width: 768px) {
+    header { padding: 1rem; flex-wrap: wrap; }
+    .nav-toggle { display: block; order: 1; }
+    .logo { order: 0; }
+    .nav { display: none; width: 100%; order: 2; margin-top: 1rem; background-color: var(--primary-container); }
+    .nav.nav-visible { display: block; }
+    .nav-list { flex-direction: column; text-align: center; }
+    .nav-list li { margin: 0; border-bottom: 1px solid var(--border-color); }
+    .nav-list li:last-child { border-bottom: none; }
+    .nav-list a { display: block; padding: 1rem; }
+    main { margin: 1rem; padding: 1rem; }
+}
