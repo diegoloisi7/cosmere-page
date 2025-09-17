@@ -30,14 +30,23 @@ document.addEventListener('DOMContentLoaded', () => {
         const lightboxImg = document.getElementById('lightbox-img');
         const lightboxCaption = document.getElementById('lightbox-caption');
         const closeBtn = document.querySelector('.lightbox-close');
+        const prevBtn = document.querySelector('.lightbox-prev');
+        const nextBtn = document.querySelector('.lightbox-next');
         const galleryItems = document.querySelectorAll('.gallery-item');
+        let currentIndex = 0;
 
-        galleryItems.forEach(item => {
+        const showImage = (index) => {
+            const item = galleryItems[index];
+            lightboxImg.src = item.href;
+            lightboxCaption.innerHTML = item.querySelector('img').alt;
+            currentIndex = index;
+        };
+
+        galleryItems.forEach((item, index) => {
             item.addEventListener('click', e => {
                 e.preventDefault();
                 lightbox.style.display = 'block';
-                lightboxImg.src = item.href;
-                lightboxCaption.innerHTML = item.querySelector('img').alt;
+                showImage(index);
             });
         });
 
@@ -45,10 +54,35 @@ document.addEventListener('DOMContentLoaded', () => {
             lightbox.style.display = 'none';
         };
 
+        const showNextImage = () => {
+            const nextIndex = (currentIndex + 1) % galleryItems.length;
+            showImage(nextIndex);
+        };
+
+        const showPrevImage = () => {
+            const prevIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+            showImage(prevIndex);
+        };
+
         closeBtn.addEventListener('click', closeLightbox);
+        nextBtn.addEventListener('click', showNextImage);
+        prevBtn.addEventListener('click', showPrevImage);
+
         lightbox.addEventListener('click', e => {
             if (e.target === lightbox) {
                 closeLightbox();
+            }
+        });
+
+        document.addEventListener('keydown', e => {
+            if (lightbox.style.display === 'block') {
+                if (e.key === 'ArrowRight') {
+                    showNextImage();
+                } else if (e.key === 'ArrowLeft') {
+                    showPrevImage();
+                } else if (e.key === 'Escape') {
+                    closeLightbox();
+                }
             }
         });
     }
