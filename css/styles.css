@@ -186,11 +186,28 @@ footer {
     transition: max-height 0.4s ease-out;
 }
 
+.book-images-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.book-images-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    background-color: #000;
+}
+
 /* --- Estilos de Galería y Lightbox --- */
 .gallery-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 1rem;
+    justify-content: center;
 }
 
 .gallery-item img {
@@ -296,6 +313,18 @@ footer {
     .nav-list li:last-child { border-bottom: none; }
     .nav-list a { display: block; padding: 1rem; }
     main { margin: 1rem; padding: 1.5rem; }
+}
+
+@media (max-width: 480px) {
+    .book-images-container {
+        grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+    }
+    .saga-accordion-panel{
+        padding: 0 1.5rem;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease-out;
+    }
 }
 
 /* --- Estilos del Formulario de Contacto --- */
